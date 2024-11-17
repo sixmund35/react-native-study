@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Sample } from "@/components/Sample";
-import { Todo } from "@/components/todo/Todo";
+
+import { TodoList } from "@/components/todo/TodoList";
 
 export default function HomeScreen() {
   return (
@@ -24,7 +24,7 @@ export default function HomeScreen() {
         {/* <Sample></Sample> */}
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <Todo />
+        <TodoList />
         {/* <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}

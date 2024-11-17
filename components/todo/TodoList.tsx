@@ -1,3 +1,5 @@
+import "react-native-get-random-values";
+import { Link } from "expo-router";
 import { useCallback, useState } from "react";
 import {
   Text,
@@ -6,11 +8,18 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Button,
 } from "react-native";
+import { v4 as uuidv4 } from "uuid";
 
-export const Todo: React.FC<{}> = () => {
+interface Todo {
+  text: string;
+  id: string;
+}
+
+export const TodoList: React.FC<{}> = () => {
   const [todoText, setTodoText] = useState<string | undefined>();
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleTextChanged = useCallback((text: string | undefined) => {
     setTodoText(text);
@@ -19,7 +28,7 @@ export const Todo: React.FC<{}> = () => {
   const handleSubmit = () => {
     if (!todoText) return;
 
-    setTodos([...todos, todoText]);
+    setTodos([...todos, { text: todoText, id: uuidv4() }]);
     setTodoText("");
   };
 
@@ -42,7 +51,19 @@ export const Todo: React.FC<{}> = () => {
       <View>
         <ScrollView>
           {todos.map((todo, index) => (
-            <Text key={`todo-items-${index}`}>{todo}</Text>
+            <View style={style.todoItems} key={`todo-${index}`}>
+              <Text key={`todo-items-${index}`}>{todo.text}</Text>
+              <Link
+                href={{
+                  pathname: "/todo/[id]",
+                  params: {
+                    id: todo.id,
+                  },
+                }}
+              >
+                See details
+              </Link>
+            </View>
           ))}
         </ScrollView>
       </View>
@@ -74,5 +95,9 @@ const style = StyleSheet.create({
     justifyContent: "center",
     marginRight: 6,
     paddingHorizontal: 4,
+  },
+  todoItems: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
