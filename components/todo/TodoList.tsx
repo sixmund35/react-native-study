@@ -11,6 +11,7 @@ import {
   Button,
 } from "react-native";
 import { v4 as uuidv4 } from "uuid";
+import { EditIcon } from "../icons/EditIcon";
 
 interface Todo {
   text: string;
@@ -54,6 +55,7 @@ export const TodoList: React.FC<{}> = () => {
             <View style={style.todoItems} key={`todo-${index}`}>
               <Text key={`todo-items-${index}`}>{todo.text}</Text>
               <Link
+                style={{ width: 20, height: 20 }}
                 href={{
                   pathname: "/todo/[id]",
                   params: {
@@ -61,7 +63,7 @@ export const TodoList: React.FC<{}> = () => {
                   },
                 }}
               >
-                See details
+                <EditIcon />
               </Link>
             </View>
           ))}
