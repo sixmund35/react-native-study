@@ -1,15 +1,9 @@
-import * as React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  GestureResponderEvent,
-} from "react-native";
+import * as React from 'react';
+import { View, Text, StyleSheet, Button, GestureResponderEvent } from 'react-native';
 
 export const Sample: React.FC<{}> = () => {
   const handlePress = (evt: GestureResponderEvent) => {
-    alert("Hello");
+    alert('Hello');
   };
 
   return (
@@ -22,11 +16,11 @@ export const Sample: React.FC<{}> = () => {
 
 const style = StyleSheet.create({
   main: {
-    color: "red",
+    color: 'red',
   },
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   button: {
     maxWidth: 100,
