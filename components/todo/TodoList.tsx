@@ -1,7 +1,7 @@
 import 'react-native-get-random-values';
 import { Link } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
 import { EditIcon } from '../icons/EditIcon';
 
@@ -37,24 +37,29 @@ export const TodoList: React.FC<{}> = () => {
 
       {/* List */}
       <View>
-        <ScrollView>
-          {todos.map((todo, index) => (
-            <View style={style.todoItems} key={`todo-${index}`}>
-              <Text key={`todo-items-${index}`}>{todo.text}</Text>
-              <Link
-                style={{ width: 20, height: 20 }}
-                href={{
-                  pathname: '/todo/[id]',
-                  params: {
-                    id: todo.id,
-                  },
-                }}
-              >
-                <EditIcon />
-              </Link>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          alwaysBounceVertical={true}
+          data={todos}
+          keyExtractor={(todo, index) => `todo-item-${index}`}
+          renderItem={(todo) => {
+            return (
+              <View style={style.todoItems}>
+                <Text>{todo.item.text}</Text>
+                <Link
+                  style={{ width: 20, height: 20 }}
+                  href={{
+                    pathname: '/todo/[id]',
+                    params: {
+                      id: todo.item.id,
+                    },
+                  }}
+                >
+                  <EditIcon />
+                </Link>
+              </View>
+            );
+          }}
+        ></FlatList>
       </View>
     </View>
   );
@@ -75,18 +80,25 @@ const style = StyleSheet.create({
   },
   submitButton: {
     flex: 1,
+    maxWidth: 200,
+  },
+  pressedButton: {
+    opacity: 0.5,
+    flex: 1,
+    maxWidth: 200,
   },
   textBox: {
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 8,
     flex: 2,
-    justifyContent: 'center',
     marginRight: 6,
     paddingHorizontal: 4,
+    maxWidth: 400,
   },
   todoItems: {
+    maxWidth: 400,
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
