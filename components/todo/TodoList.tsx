@@ -4,6 +4,8 @@ import { useCallback, useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
 import { EditIcon } from '../icons/EditIcon';
+import { AddTodoForm } from './AddTodoForm';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Todo {
   text: string;
@@ -11,33 +13,32 @@ interface Todo {
 }
 
 export const TodoList: React.FC<{}> = () => {
-  const [todoText, setTodoText] = useState<string | undefined>();
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [isDisplayingModal, setIsDisplayingModal] = useState<boolean>(false);
 
-  const handleTextChanged = useCallback((text: string | undefined) => {
-    setTodoText(text);
-  }, []);
-
-  const handleSubmit = () => {
+  const handleSubmit = (todoText: string) => {
     if (!todoText) return;
 
     setTodos([...todos, { text: todoText, id: uuidv4() }]);
-    setTodoText('');
+    toggleModal();
   };
 
+  const toggleModal = useCallback(() => {
+    setIsDisplayingModal(!isDisplayingModal);
+  }, [isDisplayingModal]);
+
   return (
-    <View>
-      {/* Form */}
-      <View style={style.form}>
-        <TextInput placeholder="Add todo" style={style.textBox} value={todoText} onChangeText={handleTextChanged} />
-        <TouchableOpacity style={style.submitButton} onPress={handleSubmit}>
-          <Text style={style.submitText}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView>
+      <AddTodoForm toggleModal={toggleModal} handleSubmit={handleSubmit} isDisplayingModal={isDisplayingModal} />
+
+      <TouchableOpacity style={style.submitButton} onPress={() => setIsDisplayingModal(!isDisplayingModal)}>
+        <Text style={style.buttonText}>Add Todo</Text>
+      </TouchableOpacity>
 
       {/* List */}
       <View>
         <FlatList
+          showsVerticalScrollIndicator={false}
           alwaysBounceVertical={true}
           data={todos}
           keyExtractor={(todo, index) => `todo-item-${index}`}
@@ -61,44 +62,28 @@ export const TodoList: React.FC<{}> = () => {
           }}
         ></FlatList>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
-  form: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  submitText: {
-    backgroundColor: 'green',
-    color: 'white',
-    textAlign: 'center',
+  centeredView: {
     justifyContent: 'center',
-    paddingVertical: 8,
-    borderRadius: 6,
-  },
-  submitButton: {
-    flex: 1,
-    maxWidth: 200,
-  },
-  pressedButton: {
-    opacity: 0.5,
-    flex: 1,
-    maxWidth: 200,
-  },
-  textBox: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 8,
-    flex: 2,
-    marginRight: 6,
-    paddingHorizontal: 4,
-    maxWidth: 400,
+    alignItems: 'center',
   },
   todoItems: {
     maxWidth: 400,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  submitButton: {
+    maxWidth: 200,
+    backgroundColor: 'green',
+    borderRadius: 6,
+    padding: 8,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
   },
 });
