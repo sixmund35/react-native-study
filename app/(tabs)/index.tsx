@@ -6,6 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 import { TodoList } from '@/components/todo/TodoList';
+import AllPlacesScreen from './all-places';
 
 export default function HomeScreen() {
   return (
@@ -20,6 +21,7 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <TodoList />
+
         {/* <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}

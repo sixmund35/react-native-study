@@ -4,6 +4,7 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -27,6 +28,13 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="all-places"
+        options={{
+          title: 'Favorite Place',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="map-pin" color={color} />,
         }}
       />
     </Tabs>
