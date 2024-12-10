@@ -57,10 +57,10 @@ const style = StyleSheet.create({
     position: 'absolute',
   },
   innerModal: {
-    maxHeight: 600,
+    minWidth: 300,
     minHeight: 200,
-    minWidth: 600,
     maxWidth: 700,
+    maxHeight: 600,
     backgroundColor: 'white',
     flexDirection: 'column',
     borderRadius: 6,
@@ -82,6 +82,7 @@ const style = StyleSheet.create({
     width: '100%',
     flex: 1,
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   modal: {
     flexDirection: 'row',
@@ -111,7 +112,8 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     padding: 4,
-    maxWidth: 400,
+    width: '100%',
+    maxWidth: 500,
     marginBottom: 8,
   },
   todoItems: {

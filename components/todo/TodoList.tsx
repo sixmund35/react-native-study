@@ -42,6 +42,7 @@ export const TodoList: React.FC<{}> = () => {
           alwaysBounceVertical={true}
           data={todos}
           keyExtractor={(todo, index) => `todo-item-${index}`}
+          scrollEnabled={false}
           renderItem={(todo) => {
             return (
               <View style={style.todoItems}>
