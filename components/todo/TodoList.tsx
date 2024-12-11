@@ -1,7 +1,7 @@
 import 'react-native-get-random-values';
 import { Link } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
 import { EditIcon } from '../icons/EditIcon';
 import { AddTodoForm } from './AddTodoForm';
@@ -12,7 +12,7 @@ interface Todo {
   id: string;
 }
 
-export const TodoList: React.FC<{}> = () => {
+export const TodoList: React.FC<unknown> = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isDisplayingModal, setIsDisplayingModal] = useState<boolean>(false);
 

@@ -6,7 +6,6 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 import { TodoList } from '@/components/todo/TodoList';
-import AllPlacesScreen from './all-places';
 
 export default function HomeScreen() {
   return (

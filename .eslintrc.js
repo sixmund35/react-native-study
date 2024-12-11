@@ -1,4 +1,4 @@
-const { rules, default: plugin } = require('eslint-plugin-react');
+require('eslint-plugin-react');
 
 // https://docs.expo.dev/guides/using-eslint/
 module.exports = {

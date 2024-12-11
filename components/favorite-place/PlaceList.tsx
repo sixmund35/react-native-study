@@ -1,4 +1,4 @@
-import { Place } from '@/models/Place';
+import { Place } from '@/models/place';
 import { FlatList, View, Image, Text, Pressable, StyleSheet } from 'react-native';
 
 interface IProps {
@@ -31,7 +31,7 @@ const PlaceItem: React.FC<{ place: Place }> = ({ place }) => {
 
 const placeListStyles = StyleSheet.create({
   fallbackContainer: {
-    flex: 1,
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -39,4 +39,3 @@ const placeListStyles = StyleSheet.create({
     fontSize: 16,
   },
 });
-const placeItemStyles = StyleSheet.create({});

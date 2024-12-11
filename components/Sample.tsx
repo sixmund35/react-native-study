@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Button, GestureResponderEvent } from 'react-native';
 
-export const Sample: React.FC<{}> = () => {
+export const Sample: React.FC<unknown> = () => {
   const handlePress = (evt: GestureResponderEvent) => {
     alert('Hello');
   };
