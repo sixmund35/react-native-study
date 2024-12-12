@@ -1,19 +1,21 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { IconButton } from '@/components/ui/IconButton';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        headerShown: true,
       }}
     >
       <Tabs.Screen
@@ -33,8 +35,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="all-places"
         options={{
-          title: 'Favorite Place',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="map-pin" color={color} />,
+          title: 'All Places',
+          tabBarIcon: ({ color }) => <FontAwesome size={16} name="map-pin" color={color} />,
+          headerRight: () => (
+            <IconButton
+              name="add"
+              size={24}
+              onPress={() => router.navigate({ pathname: '/favorite-place/add-place' }, { relativeToDirectory: true })}
+            />
+          ),
         }}
       />
     </Tabs>
