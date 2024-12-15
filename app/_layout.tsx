@@ -31,7 +31,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="favorite-place/add-place" options={{ title: 'Add place' }} />
+        <Stack.Screen name="favorite-place/add-place" options={{ title: 'Add place', headerBackTitle: 'Back' }} />
       </Stack>
     </ThemeProvider>
   );
