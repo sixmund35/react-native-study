@@ -1,10 +1,10 @@
-import { Alert, View, Image, Text, StyleSheet } from 'react-native';
+import { Alert, View, Image, Text, StyleSheet, ViewStyle } from 'react-native';
 import { launchCameraAsync, useCameraPermissions, PermissionStatus, ImagePickerAsset } from 'expo-image-picker';
 import { useState } from 'react';
 import { Colors } from '@/constants/Colors';
 import { OutlinedIconButton } from '../ui/OutlinedIconButton';
 
-export const ImagePicker = () => {
+export const ImagePicker = (props: { containerStyle?: ViewStyle }) => {
   const [cameraPermissionInfo, requestPermission] = useCameraPermissions();
   const [image, setImage] = useState<ImagePickerAsset | null>(null);
 
@@ -42,7 +42,7 @@ export const ImagePicker = () => {
   }
 
   return (
-    <View>
+    <View style={props.containerStyle}>
       <View style={styles.imagePreview}>{imagePreview}</View>
       <OutlinedIconButton fontSize={16} onPress={takeImageHandler} color={Colors.light.tint} iconName="camera" text="Take Image" />
     </View>
